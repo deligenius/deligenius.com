@@ -2,6 +2,7 @@ import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
+import './styles/styles.css'
 
 import components from "./MDXComponents"
 
