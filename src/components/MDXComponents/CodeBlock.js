@@ -27,7 +27,7 @@ const LineContent = styled.span`
 `;
 
 export default ({children, className}) => {
-  console.log("code", children)
+  // console.log("code", children)
   const language = className.replace(/language-/, '')
   return (
     <Highlight {...defaultProps} theme={theme} code={children.trim()} language={language}>

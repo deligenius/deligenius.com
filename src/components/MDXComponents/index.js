@@ -1,7 +1,6 @@
 import React from "react"
 // import { Link } from "gatsby"
-import CodeBlock from './CodeBlock'
-
+import CodeBlock from "./CodeBlock"
 
 export default {
   h1: props => <h1 className="is-size-1" {...props} />,
@@ -12,6 +11,5 @@ export default {
   h6: props => <h6 className="is-size-6" {...props} />,
   h7: props => <h7 className="is-size-7" {...props} />,
   pre: props => <div {...props} />,
-  code: props => <CodeBlock {...props}/>
+  code: CodeBlock,
 }
-

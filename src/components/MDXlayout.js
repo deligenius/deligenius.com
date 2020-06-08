@@ -1,12 +1,14 @@
 import React from "react"
 import { MDXProvider } from "@mdx-js/react"
 import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from "react-helmet"
+
 import Header from "./header"
-import './styles/styles.css'
+import "./styles/styles.css"
 
 import components from "./MDXComponents"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, pageContext, ...props }) => {
   const data = useStaticQuery(graphql`
     query MDXSiteTitleQuery {
       site {
@@ -14,14 +16,31 @@ const Layout = ({ children }) => {
           title
         }
       }
+      allMdx {
+        edges {
+          node {
+            frontmatter {
+              title
+            }
+          }
+        }
+      }
     }
   `)
-
+  let title = pageContext.frontmatter.title || data.site.siteMetadata.title
+  // console.log(data)
+  // console.log("props", props)
   return (
-    <MDXProvider components={components}>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      {children}
-    </MDXProvider>
+    <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{title}</title>
+      </Helmet>
+      <MDXProvider components={components} path="/getting-started">
+        <Header siteTitle={title} />
+        {children}
+      </MDXProvider>
+    </div>
   )
 }
 
