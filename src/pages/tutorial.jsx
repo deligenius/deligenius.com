@@ -8,7 +8,6 @@ import Footer from "../layouts/Footer"
 const TutorialPage = () => (
   <Layout>
     <Header />
-    <h2>Tutorial</h2>
     <Body></Body>
     <Footer></Footer>
   </Layout>

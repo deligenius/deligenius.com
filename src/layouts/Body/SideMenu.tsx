@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from '@reach/router'
 
 interface MenuItem {
   label: string;
@@ -12,7 +13,7 @@ const list: MenuItem[] = [
     toggle: true,
     items: [
       { label: "Getting Started" },
-      { label: "Plugins" },
+      { label: "Hello" },
       { label: "Add a member" },
     ],
   },
@@ -49,13 +50,14 @@ class Menu extends React.Component {
       return (
         <ul>
           {items.map((subItem) => {
-            let hashLabel =
-              "#" + subItem.label.toLowerCase().split(" ").join("-");
+            let hashLabel = subItem.label.toLowerCase().split(" ").join("-");
             let active = hashLabel === window.location.hash;
 
             return (
               <li key={subItem.label}>
-                <a className={active ? "is-active" : ""} href={`/${hashLabel}`}>{subItem.label}</a>
+                <Link className={active ? "is-active" : ""} to={`/docs/${hashLabel}`}>
+                  {subItem.label}
+                  </Link>
               </li>
             );
           })}

@@ -1,3 +1,7 @@
 pre .number, pre .tag{
   all: unset
 }
+
+a.navbar-item.active{
+  border-bottom: 5px solid #0ED1B2;
+}

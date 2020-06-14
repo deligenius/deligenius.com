@@ -2,13 +2,12 @@ const path = require("path")
 
 const { createFilePath } = require("gatsby-source-filesystem")
 
-
 exports.onCreateWebpackConfig = ({ getConfig, stage }) => {
   const config = getConfig()
-  if (stage.startsWith('develop') && config.resolve) {
+  if (stage.startsWith("develop") && config.resolve) {
     config.resolve.alias = {
       ...config.resolve.alias,
-      'react-dom': '@hot-loader/react-dom'
+      "react-dom": "@hot-loader/react-dom",
     }
   }
 }
@@ -20,7 +19,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   // `File` node here
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode })
-    
+
     const route = node.frontmatter.route || "/"
 
     createNodeField({
@@ -62,8 +61,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   posts.forEach(({ node }, index) => {
     // /docs/hello/
     const slug = node.fields.slug
-    const basePath = slug.split("/")[1] || "docs"
-    console.log(slug, basePath)
+    const basePath = slug.split("/")[1] || "index"
+    // console.log(slug, basePath)
     createPage({
       // This is the slug you created before
       // (or `node.frontmatter.slug`)
@@ -72,11 +71,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       component: path.resolve(`${__dirname}/src/pages/${basePath}.jsx`),
       // You can use the values in this context in
       // our page layout component
-      context: { id: node.id },
+      context: { id: node.id , slug},
     })
   })
 }
-
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions

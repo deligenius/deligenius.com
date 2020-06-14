@@ -35,13 +35,13 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        // defaultLayouts: {
-          // default: require.resolve(`${__dirname}/src/layouts_mdx/layout.js`),
-        // },
+        name: `index`,
+        path: `${__dirname}/content/index/`,
       },
     },
+    `gatsby-plugin-mdx`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
