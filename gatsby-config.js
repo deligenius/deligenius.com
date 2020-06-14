@@ -30,23 +30,16 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages/`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `docs`,
-        path: `${__dirname}/src/pages/`,
+        path: `${__dirname}/content/docs/`,
       },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        defaultLayouts: {
-          default: require.resolve("./src/components/MDXlayout.js"),
-        },
+        // defaultLayouts: {
+          // default: require.resolve(`${__dirname}/src/layouts_mdx/layout.js`),
+        // },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
