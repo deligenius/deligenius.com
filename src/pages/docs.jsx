@@ -5,10 +5,7 @@ import Header from "../layouts/Header"
 import Body from "../layouts/Body/index"
 import Footer from "../layouts/Footer"
 
-const DocsPage = (props) => {
-  console.log(props)
-  let { pathname } = props.location
-  // let slug = pathname === "/docs" ? "/docs/getting-started" : pathname
+const DocsPage = props => {
   let mdx = props.data.mdx
 
   return (

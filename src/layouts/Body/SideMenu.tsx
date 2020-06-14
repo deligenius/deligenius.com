@@ -1,83 +1,100 @@
-import React from "react";
-import {Link} from '@reach/router'
+import React from "react"
+import { Link } from "@reach/router"
 
-interface MenuItem {
-  label: string;
-  toggle?: boolean;
-  items?: MenuItem[];
+interface Menu {
+  category: string
+  menuItems: MenuItem[]
 }
 
-const list: MenuItem[] = [
-  {
-    label: "Dashboard",
-    toggle: true,
-    items: [
-      { label: "Getting Started" },
-      { label: "Hello" },
-      { label: "Add a member" },
-    ],
-  },
-  {
-    label: "Installation",
-    toggle: false,
-    items: [
-      { label: "Members" },
-      { label: "Plugins" },
-      { label: "Add a member" },
-    ],
-  },
-];
-class Menu extends React.Component {
+interface MenuItem {
+  label: string
+  toggle?: boolean
+  items?: MenuItem[]
+}
+
+const docsMenu: Menu = {
+  category: "docs",
+  menuItems: [
+    {
+      label: "Installation",
+      toggle: true,
+      items: [{ label: "Getting Started" }, { label: "Hello" }],
+    },
+  ],
+}
+
+/* ----------------------------- Side Menu class ---------------------------- */
+
+class SideMenu extends React.Component<
+  null,
+  { category: string; menuItems: MenuItem[]; activeItem: MenuItem }
+> {
   constructor(props: any) {
-    super(props);
-    this.state = { list: list };
-    // this.handleClickMenu = this.handleClickMenu.bind(this)
+    super(props)
+    this.state = {
+      category: docsMenu.category,
+      menuItems: docsMenu.menuItems,
+      activeItem: { label: "Getting Started" },
+    }
   }
 
-  handleClickMenu(label: string) {
-    let newList = list.forEach((item) => {
+  handleClickMenuLabel(label: string) {
+    let newMenuItems = this.state.menuItems.map(item => {
       if (item.label === label) {
-        item.toggle = !item.toggle;
+        item.toggle = !item.toggle
       }
-    });
-    this.setState({ list: newList });
+      return item
+    })
+    this.setState({ menuItems: newMenuItems })
   }
 
   displayItems(items: MenuItem[] | undefined) {
     if (!items || items.length < 1) {
-      return;
+      return
     } else {
+      // display article label title
+      let { category } = this.state
+      let windowPath =
+        window.location.pathname.match(/^\/docs\/?$/)
+          ? "/docs/getting-started"
+          : window.location.pathname
+
       return (
         <ul>
-          {items.map((subItem) => {
-            let hashLabel = subItem.label.toLowerCase().split(" ").join("-");
-            let active = hashLabel === window.location.hash;
+          {items.map(item => {
+            let hashLabel = item.label.toLowerCase().split(" ").join("-")
+            let path = `/${category}/${hashLabel}`
+            let active = path === windowPath
 
             return (
-              <li key={subItem.label}>
-                <Link className={active ? "is-active" : ""} to={`/docs/${hashLabel}`}>
-                  {subItem.label}
-                  </Link>
+              <li key={item.label}>
+                <Link className={active ? "is-active" : ""} to={path}>
+                  {item.label}
+                </Link>
               </li>
-            );
+            )
           })}
         </ul>
-      );
+      )
     }
   }
 
   render() {
+    let { menuItems, category } = this.state
+
     return (
-      <aside className="menu">
+      <aside className="menu" style={{ borderRight: "1px solid lightgrey" }}>
         <ul className="menu-list">
-          {list.map((item) => {
-            let items = item.items;
-            let label = item.label;
-            let toggle = item.toggle;
+          {menuItems.map(item => {
+            let { items, label, toggle } = item
 
             return (
               <li key={label}>
-                <a onClick={this.handleClickMenu.bind(this, label)} >
+                <a
+                  onClick={this.handleClickMenuLabel.bind(this, label)}
+                  className="has-text-weight-medium is-uppercase"
+                >
+                  {/* table of content label */}
                   <span>{label}</span>
                   <span className="icon">
                     <i
@@ -88,12 +105,12 @@ class Menu extends React.Component {
 
                 {toggle && this.displayItems(items)}
               </li>
-            );
+            )
           })}
         </ul>
       </aside>
-    );
+    )
   }
 }
 
-export default Menu;
+export default SideMenu

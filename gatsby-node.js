@@ -71,20 +71,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       component: path.resolve(`${__dirname}/src/pages/${basePath}.jsx`),
       // You can use the values in this context in
       // our page layout component
-      context: { id: node.id , slug},
+      context: { id: node.id, slug },
     })
   })
 }
 
+// TODO: create Menu graphql resolver 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
-    type AuthorJson implements Node @dontInfer {
-      name: String!
-      firstName: String!
-      email: String!
-      joinedAt: Date
+    type Menu implements Node @dontInfer {
+      category: String!
+      items: [MenuItem]!
+    }
+
+    type MenuItem {
+      title: String!
+      items: [MenuItem]
     }
   `
   createTypes(typeDefs)
 }
+

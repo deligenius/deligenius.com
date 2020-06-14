@@ -1,11 +1,13 @@
 import React from "react"
 
 import { Router } from "@reach/router"
+import {navigate} from 'gatsby'
 import DocsPage from "./docs"
 import TutorialPage from "./tutorial"
 
 const IndexPage = ({data}) => {
-  console.log(data)
+  navigate("/docs")
+  
   return (
     <Router>
       <DocsPage  path="/" data={data}/>
