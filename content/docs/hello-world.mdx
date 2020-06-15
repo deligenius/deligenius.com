@@ -1,5 +1,5 @@
 ---
-title: Hello World example - Deligenius
+title: Hello World example
 route: /docs/hello-world
 ---
 
@@ -7,22 +7,22 @@ route: /docs/hello-world
 
 ```ts
 // ./app.ts
-import { Application } from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts";
+import { Application } from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts"
 
-let app = new Application({ port: 8000 }).listen();
+let app = new Application({ port: 8000 }).listen()
 
-app.use((ctx) => {
-  ctx.send("Hello World!");
-});
+app.use(ctx => {
+  ctx.send("Hello World!")
+})
 ```
 
-The server starts and listens on port 8000 for requests. 
+The server starts and listens on port 8000 for requests.
 It responsed every request with "Hello World".
 
 #### Run server locally
 
-Create a directory named ```server```. Then create a file named 
-```app.ts``` then copy the code above. Your directory should be like this:
+Create a directory named `server`. Then create a file named
+`app.ts` then copy the code above. Your directory should be like this:
 
 ```
 server/
@@ -30,6 +30,8 @@ server/
 ```
 
 Run the app with command below:
+
 ```bash
-> deno run 
+> deno run --allow-net ./app.ts
 ```
+

@@ -1,0 +1,91 @@
+---
+title: Basic Routing
+route: /docs/basic-routing
+---
+
+### Basic Routing
+
+> If you are familiar with [express.js](https://expressjs.com/),
+> `Router` is your friend.
+
+Route definition:
+
+```ts
+router.METHOD(PATH, HANDLER)
+```
+
+Where: 
+ - ```METHOD = get | post | put | delete | connect | options | trace | patch```
+ - ```PATH: string``` is a path on the server, starts with ```"/"```
+ - ```HANDLER: Function``` will execute when the route is matched
+
+### A routing example:
+
+```ts
+let router = new Router("/")
+
+app.use(router)
+
+router.get("/", ({ req, res }, next) => {
+  res.send("You reached " + req.url)
+})
+```
+
+#### Explanation of the code:
+
+```ts
+let router = new Router("/")
+```
+
+We first create a new `Router` for route `"/"`, which means that
+everytime a client send HTTP request goes to "http://localhost/", this router
+will receive the request.
+
+---
+
+```ts
+app.use(router)
+```
+
+`app` is an instance of `Application`,
+`app.use(router)` activate the router in `app`
+
+---
+
+```ts
+router.get("/", ({ req, res }) => {
+  res.send("You reached " + req.url)
+})
+```
+
+`router.get` accepts a `PATH` and `HANDLER`
+
+Where:
+- `PATH` = `"/"`
+- `HANDLER` = 
+```ts
+  ({ req, res }) => {
+  res.send("You reached " + req.url);
+  }
+```
+
+When the request hit the ```PATH```, the ```HANDLER``` function executes.
+Here out handler sents a message with ```"You reached " + req.url```
+
+#### The complete example 
+
+```ts
+import {
+  Application,
+  Router,
+} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts";
+
+let app = new Application({ port: 8000 }).listen();
+let router = new Router("/");
+
+app.use(router);
+
+router.get("/", ({ req, res }, next) => {
+  res.send("You reached " + req.url);
+});
+```

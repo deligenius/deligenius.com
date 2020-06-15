@@ -10,7 +10,7 @@ const Layout = ({ mdx }) => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{mdx.frontmatter.title}</title>
+        <title>{mdx.frontmatter.title} | Deligenius - web framework for Deno</title>
       </Helmet>
       {/* <h1>{mdx.frontmatter.title}</h1> */}
       <div className="markdown-body">
