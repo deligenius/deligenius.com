@@ -11,7 +11,6 @@ interface MenuItem {
   label: string
   route?: string
   toggle?: boolean
-  active?: boolean
   items?: MenuItem[]
 }
 
@@ -25,10 +24,9 @@ const docsMenu: Menu = {
         {
           label: "Installation",
           route: "/docs/installation",
-          active: true,
         },
-        { label: "Hello world", route: "/docs/hello-world", active: true },
-        { label: "Basic Routing", route: "/docs/basic-routing", active: true },
+        { label: "Hello world", route: "/docs/hello-world", },
+        { label: "Basic Routing", route: "/docs/basic-routing" },
       ],
     },
   ],
@@ -89,7 +87,7 @@ class SideMenu extends React.Component<
       <aside className="menu" style={{ borderRight: "1px solid lightgrey" }}>
         <ul className="menu-list">
           {menuItems.map(item => {
-            let { items, label, toggle, active } = item
+            let { items, label, toggle } = item
             let activeStyle = this.state.lastToggle === item.label ? { border: "1px solid lightgrey" }: {}
             return (
               <li key={label}>
