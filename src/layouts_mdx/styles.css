@@ -22,8 +22,9 @@
   margin: 1rem 0;
 }
 
-.markdown-body h1 > code{
-  color: "#0ED1B2"
+
+.markdown-body code{
+  padding: 1px 0.5em;
 }
 
 .markdown-body .message-body{

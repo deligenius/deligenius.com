@@ -11,6 +11,22 @@ const BlockQuote = props => {
   )
 }
 
+const Ul = props => {
+  return (
+    <div class="content">
+      <ul {...props}></ul>
+    </div>
+  )
+}
+
+const Ol = props => {
+  return (
+    <div class="content">
+      <ul {...props}></ul>
+    </div>
+  )
+}
+
 export default {
   h1: props => <h1 className="is-size-1" {...props} />,
   h2: props => <h2 className="is-size-2" {...props} />,
@@ -22,4 +38,6 @@ export default {
   pre: props => <div {...props} />,
   code: CodeBlock,
   blockquote: BlockQuote,
+  ul: Ul,
+  ol: Ol,
 }

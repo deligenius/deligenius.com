@@ -10,25 +10,32 @@ route: /docs/basic-routing
 
 Route definition:
 
-```ts
+```jsx
 router.METHOD(PATH, HANDLER)
 ```
 
-Where: 
- - ```METHOD = get | post | put | delete | connect | options | trace | patch```
- - ```PATH: string``` is a path on the server, starts with ```"/"```
- - ```HANDLER: Function``` will execute when the route is matched
+Where:
+
+- `METHOD = get | post | put | delete | connect | options | trace | patch`
+- `PATH: string` is a path on the server, starts with `"/"`
+- `HANDLER: Function` will execute when the route is matched
 
 ### A routing example:
 
 ```ts
-let router = new Router("/")
+import {
+  Application,
+  Router,
+} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts";
 
-app.use(router)
+let app = new Application({ port: 8000 }).listen();
+let router = new Router("/");
+
+app.use(router);
 
 router.get("/", ({ req, res }, next) => {
-  res.send("You reached " + req.url)
-})
+  res.send("You reached " + req.url);
+});
 ```
 
 #### Explanation of the code:
@@ -48,7 +55,7 @@ app.use(router)
 ```
 
 `app` is an instance of `Application`,
-`app.use(router)` activate the router in `app`
+`app.use(router)` activate the router.
 
 ---
 
@@ -58,34 +65,18 @@ router.get("/", ({ req, res }) => {
 })
 ```
 
-`router.get` accepts a `PATH` and `HANDLER`
+`router.get(PATH, HANDLER)` accepts `PATH` and `HANDLER`
 
 Where:
+
 - `PATH` = `"/"`
-- `HANDLER` = 
-```ts
-  ({ req, res }) => {
-  res.send("You reached " + req.url);
-  }
-```
-
-When the request hit the ```PATH```, the ```HANDLER``` function executes.
-Here out handler sents a message with ```"You reached " + req.url```
-
-#### The complete example 
+- `HANDLER` =
 
 ```ts
-import {
-  Application,
-  Router,
-} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts";
-
-let app = new Application({ port: 8000 }).listen();
-let router = new Router("/");
-
-app.use(router);
-
-router.get("/", ({ req, res }, next) => {
-  res.send("You reached " + req.url);
-});
+({ req, res }) => {
+  res.send("You reached " + req.url)
+}
 ```
+
+When the request hit the `PATH`, the `HANDLER` function executes.
+Here the handler sends a message with `"You reached " + req.url`
