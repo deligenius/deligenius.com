@@ -11,6 +11,7 @@ export type MDX = {
   body: string
   frontmatter: {
     title: string
+    route: string
   }
 }
 
@@ -21,7 +22,7 @@ class Body extends React.Component<Props> {
         <div className="container">
           <div className="columns">
             <div className="column is-one-fifth mr-6">
-              <Menu />
+              <Menu mdx={this.props.mdx} />
             </div>
             <div className="column">
               <Content mdx={this.props.mdx} />

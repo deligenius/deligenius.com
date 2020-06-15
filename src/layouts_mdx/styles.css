@@ -1,0 +1,31 @@
+
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+
+.markdown-body h1 {
+  margin-top: 0;
+  padding-bottom: 0.2em;
+}
+
+.markdown-body p {
+  margin: 1rem 0;
+}
+
+.markdown-body h1 > code{
+  color: "#0ED1B2"
+}
+
+.markdown-body .message-body{
+  padding: 0 1rem;
+}

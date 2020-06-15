@@ -34,13 +34,6 @@ module.exports = {
         path: `${__dirname}/content/docs/`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `index`,
-        path: `${__dirname}/content/index/`,
-      },
-    },
     `gatsby-plugin-mdx`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

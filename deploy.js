@@ -2,6 +2,7 @@ const path = require("path")
 const fs = require("fs")
 const ncp = require("ncp").ncp
 
+// copy /public to /docs
 fs.rmdirSync(path.join(__dirname, "docs"), { recursive: true })
 fs.mkdirSync("docs")
 

@@ -53,12 +53,12 @@ class Header extends React.Component {
                 Docs
               </Link>
 
-              <Link to="/tutorial" className="navbar-item">
+              {/* <Link to="/tutorial" className="navbar-item">
                 <span role="img" aria-label="Book">
                   📖
                 </span>
                 Tutorial
-              </Link>
+              </Link> */}
             </div>
 
             <div className="navbar-end">

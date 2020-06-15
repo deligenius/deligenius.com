@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "@reach/router"
+import { Props } from "./index"
 
 interface Menu {
   category: string
@@ -8,7 +9,9 @@ interface Menu {
 
 interface MenuItem {
   label: string
+  route?: string
   toggle?: boolean
+  active?: boolean
   items?: MenuItem[]
 }
 
@@ -16,9 +19,17 @@ const docsMenu: Menu = {
   category: "docs",
   menuItems: [
     {
-      label: "Installation",
+      label: "Getting Started",
       toggle: true,
-      items: [{ label: "Getting Started" }, { label: "Hello" }],
+      items: [
+        {
+          label: "Installation",
+          route: "/docs/installation",
+          active: true,
+        },
+        { label: "Hello world", route: "/docs/hello-world", active: true },
+        { label: "Basic Routing", route: "/docs/basic-routing", active: true },
+      ],
     },
   ],
 }
@@ -26,15 +37,15 @@ const docsMenu: Menu = {
 /* ----------------------------- Side Menu class ---------------------------- */
 
 class SideMenu extends React.Component<
-  null,
-  { category: string; menuItems: MenuItem[]; activeItem: MenuItem }
+  Props,
+  { category: string; menuItems: MenuItem[], lastToggle: string}
 > {
   constructor(props: any) {
     super(props)
     this.state = {
       category: docsMenu.category,
       menuItems: docsMenu.menuItems,
-      activeItem: { label: "Getting Started" },
+      lastToggle: ""
     }
   }
 
@@ -45,7 +56,7 @@ class SideMenu extends React.Component<
       }
       return item
     })
-    this.setState({ menuItems: newMenuItems })
+    this.setState({ menuItems: newMenuItems, lastToggle: label })
   }
 
   displayItems(items: MenuItem[] | undefined) {
@@ -53,22 +64,14 @@ class SideMenu extends React.Component<
       return
     } else {
       // display article label title
-      let { category } = this.state
-      let windowPath =
-        window.location.pathname.match(/^\/docs\/?$/)
-          ? "/docs/getting-started"
-          : window.location.pathname
-
       return (
         <ul>
           {items.map(item => {
-            let hashLabel = item.label.toLowerCase().split(" ").join("-")
-            let path = `/${category}/${hashLabel}`
-            let active = path === windowPath
+            let active = item.route === this.props.mdx.frontmatter.route
 
             return (
               <li key={item.label}>
-                <Link className={active ? "is-active" : ""} to={path}>
+                <Link className={active ? "is-active" : ""} to={item.route}>
                   {item.label}
                 </Link>
               </li>
@@ -80,17 +83,18 @@ class SideMenu extends React.Component<
   }
 
   render() {
-    let { menuItems, category } = this.state
+    let { menuItems } = this.state
 
     return (
       <aside className="menu" style={{ borderRight: "1px solid lightgrey" }}>
         <ul className="menu-list">
           {menuItems.map(item => {
-            let { items, label, toggle } = item
-
+            let { items, label, toggle, active } = item
+            let activeStyle = this.state.lastToggle === item.label ? { border: "1px solid lightgrey" }: {}
             return (
               <li key={label}>
                 <a
+                  style={activeStyle}
                   onClick={this.handleClickMenuLabel.bind(this, label)}
                   className="has-text-weight-medium is-uppercase"
                 >
