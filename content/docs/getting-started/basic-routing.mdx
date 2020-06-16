@@ -20,7 +20,7 @@ Where:
 - `PATH: string` is a path on the server, starts with `"/"`
 - `HANDLER: Function` will execute when the route is matched
 
-### A routing example:
+### A routing example
 
 ```ts
 import {
@@ -44,8 +44,8 @@ router.get("/", ({ req, res }, next) => {
 let router = new Router("/")
 ```
 
-We first create a new `Router` for route `"/"`, which means that
-everytime a client send HTTP request goes to "http://localhost/", this router
+We first create a new `Router` for path `"/"`, which means that
+everytime a client send HTTP request goes to "/", this router
 will receive the request.
 
 ---

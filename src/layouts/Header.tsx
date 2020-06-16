@@ -7,6 +7,9 @@ interface State {
 }
 
 const Header = prpos => {
+  const [activate, setActivate] = React.useState(false)
+
+  // get logo image
   const data = useStaticQuery(graphql`
     query LogoQuery($height: Int = 28) {
       imageSharp(fixed: { originalName: { eq: "deligenius.png" } }) {
@@ -17,7 +20,13 @@ const Header = prpos => {
     }
   `)
 
+  const handleClickHamburger = () => {
+    let _activate = activate
+    setActivate(!_activate)
+  }
+
   const logoSrc = data.imageSharp.resize.src
+  const activateClass = activate ? "is-active" : ""
 
   return (
     <div className="has-background-dark">
@@ -42,10 +51,11 @@ const Header = prpos => {
 
           <a
             role="button"
-            className="navbar-burger burger"
+            className={`navbar-burger burger ${activateClass}`}
             aria-label="menu"
             aria-expanded="false"
-            data-target="navbarBasicExample"
+            data-target="navbarBasic"
+            onClick={handleClickHamburger}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -53,7 +63,7 @@ const Header = prpos => {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className="navbar-menu is-active">
+        <div id="navbarBasic" className={`navbar-menu ${activateClass}`}>
           <div className="navbar-start">
             <Link to="/docs" className="navbar-item active">
               <span role="img" aria-label="Page Facing Up">
