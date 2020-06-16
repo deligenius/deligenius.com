@@ -1,0 +1,53 @@
+---
+title: Error Handling
+route: /docs/error-handling
+---
+
+### Error handling
+
+Deligenius has a default error handler `handleError`
+in every `Application` and `Router`
+
+#### Error handling in middleware
+
+Use `try...catch` to catch error is very common.
+The best pratice is to handle every error it yourself.
+
+```ts
+app.use(async (ctx, next) => {
+  try {
+    methodThrowError()
+  } catch (e) {
+    console.log(e)
+  }
+})
+```
+
+#### Throw `HttpError`
+
+You can also throw HttpError anywhere in a middleware:
+`throw new HttpError(message, statusCode)`.
+it will be handled by the `app.handleError` or `router.handleError`
+and it won't crash the server.
+
+```ts
+import {HttpError} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts"
+// you can throw HttpError in any middleware
+app.use(async (ctx, next) => {
+  throw new HttpError("no user found", 404)
+})
+```
+
+#### Override `errorHandler`
+
+`app.errorHandler` and `router.errorHandler` can be override as:
+
+```ts
+app.handleError = (err, ctx) => {
+  if (err instanceof HttpError) {
+    ctx.status(err.status).send("http error")
+  } else {
+    ctx.send("some other error")
+  }
+}
+```

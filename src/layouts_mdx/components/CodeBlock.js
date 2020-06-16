@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import Highlight, { defaultProps } from "prism-react-renderer"
-import vsDark from "prism-react-renderer/themes/vsDark"
+// import vsDark from "prism-react-renderer/themes/vsDark"
+import vsDark from "./CodeBlockTheme"
 
 const Pre = styled.pre`
   text-align: left;

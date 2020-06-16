@@ -29,6 +29,20 @@ const docsMenu: Menu = {
         { label: "Basic Routing", route: "/docs/basic-routing" },
       ],
     },
+    {
+      label: "Quick Guide",
+      toggle: false,
+      items: [
+        {
+          label: "Parsing Body",
+          route: "/docs/parsing-body",
+        },
+        {
+          label: "Error Handling",
+          route: "/docs/error-handling",
+        },
+      ],
+    },
   ],
 }
 

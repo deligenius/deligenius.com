@@ -1,0 +1,78 @@
+---
+title: Parsing Body
+route: /docs/parsing-body
+---
+
+### Use BodyParser
+
+> Deligenius has a separate middleware module: `bodyParser`,
+> which can be used to parse **parameter**, **query**, **json** etc,.
+> `mid` is a shortcut of [bodyParser](https://github.com/deligenius/bodyparser)
+> which includes many pre-configured middlewares for `deligenius`
+
+```ts
+import { mid } from "https://raw.githubusercontent.com/deligenius/bodyparser/master/mod.ts"
+```
+
+#### Get `query` parameter
+
+We will first start a complete example,
+then you can better understand the `mid` method with more parser middlewares.
+
+```ts
+import {
+  Application,
+  Router,
+} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts"
+import { mid } from "https://raw.githubusercontent.com/deligenius/bodyparser/master/mod.ts"
+
+let app = new Application({ port: 8000 }).listen()
+
+app.use(mid.query(), ctx => {
+  let query = ctx.req.query
+  ctx.send(query)
+})
+```
+
+#### Get `json` data
+
+```ts
+app.use(mid.json(), ctx => {
+  let json = ctx.req.json
+  ctx.send(json)
+})
+```
+
+#### Get `params`
+
+```ts
+app.use(mid.params("/:name/:age"), ctx => {
+  let params = ctx.req.params
+  ctx.send(params)
+})
+```
+
+#### Get `multipart/form-data`
+
+Dealing with ```multipart/form-data``` can be very complicated,
+but fortunately Deligenius has an official [Multiparser](https://github.com/deligenius/multiparser)
+to handle this kind of data.
+
+```ts
+import { multiParser } from 'https://raw.githubusercontent.com/deligenius/multiparser/master/mod.ts'
+
+app.use(async(ctx) => {
+  const form = await multiParser(ctx.request)
+  ctx.send(form)
+})
+```
+
+
+#### Get `urlencoded` form data
+
+```ts
+app.use(mid.urlencoded(), ctx => {
+  let urlencoded = ctx.req.urlencoded
+  ctx.send(urlencoded)
+})
+```
