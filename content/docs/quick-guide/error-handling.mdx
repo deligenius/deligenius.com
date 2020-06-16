@@ -5,7 +5,7 @@ route: /docs/error-handling
 
 ### Error handling
 
-Deligenius has a default error handler `handleError`
+>Deligenius has a default error handler `handleError`
 in every `Application` and `Router`
 
 #### Error handling in middleware
@@ -38,9 +38,9 @@ app.use(async (ctx, next) => {
 })
 ```
 
-#### Override `errorHandler`
+#### Override `handleError`
 
-`app.errorHandler` and `router.errorHandler` can be override as:
+`app.handleError` and `router.handleError` can be override as:
 
 ```ts
 app.handleError = (err, ctx) => {

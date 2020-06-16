@@ -5,6 +5,9 @@ route: /docs/hello-world
 
 ### Hello world example
 
+The server starts and listens on `port:8000` for requests.
+It responsed every request with "Hello World".
+
 ```ts
 // ./app.ts
 import { Application } from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts"
@@ -16,10 +19,8 @@ app.use(ctx => {
 })
 ```
 
-The server starts and listens on port 8000 for requests.
-It responsed every request with "Hello World".
 
-#### Run server locally
+### Run server locally
 
 Create a directory named `server`. Then create a file named
 `app.ts` then copy the code above. Your directory should be like this:
