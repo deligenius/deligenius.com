@@ -1,0 +1,32 @@
+---
+title: Benchmark
+route: /docs/benchmark
+---
+
+### Benchmark
+
+> All the servers returns "Hello World!" message,
+> benchmark scripts can be found on [deligenius repo](https://github.com/deligenius/deligenius/tree/master/benchmark).
+
+| Framework      | Version | Request/Second | Perfomance % |
+| -------------- | ------- | -------------- | ------------ |
+| Deno http      | 0.57.0  | 35802          | 100%         |
+| **Deligenius** | v1.0.0  | **34991.67**   | **97.74%**   |
+| denotrain      | v0.5.2  | 31117.67       | 86.92%       |
+| fastro         | v0.11.0 | 29814          | 83.27%       |
+| Oak            | v5.2.0  | 29474.33       | 82.32%       |
+
+**Environment**:
+
+- CPU: i5-9600KF @3.7GHz
+- RAM: 16GB DDR4 2133MHz
+- OS: Windows 10
+- Benchmark tool: [autocannon](https://github.com/mcollina/autocannon)
+
+**Benchmark procedure**:
+
+1. Use `autocannon` to send requests in 10 seconds with its default setting.
+2. Repeats 5 times.
+3. Discard the highest mark and the lowest mark.
+4. Take the rest of 3 results, calculate the average.
+5. That's it.

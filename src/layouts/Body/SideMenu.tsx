@@ -25,6 +25,10 @@ const docsMenu: Menu = {
           label: "Installation",
           route: "/docs/installation",
         },
+        {
+          label: "Benchmark",
+          route: "/docs/benchmark",
+        },
         { label: "Hello world", route: "/docs/hello-world", },
         { label: "Basic Routing", route: "/docs/basic-routing" },
       ],

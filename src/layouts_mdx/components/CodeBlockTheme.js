@@ -1,4 +1,3 @@
-'use strict';
 
 // Converted automatically using ./tools/themeFromVsCode
 var theme = {
