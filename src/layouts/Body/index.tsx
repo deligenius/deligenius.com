@@ -55,15 +55,17 @@ const Body: React.FC<Props> = props => {
               bottom: "1rem",
               zIndex: 50,
             }}
-            onClick={handleClickFloatMenu}
           >
-            <a className="button is-primary is-rounded is-medium">
+            <a
+              className="button is-primary is-rounded is-medium"
+              onClick={handleClickFloatMenu}
+            >
               <span className="icon ">
                 <i className={`fa ${activeIcon}`}></i>
               </span>
             </a>
           </div>
-
+          {/* MDX content */}
           <div className="column">
             <Content mdx={props.mdx} />
           </div>

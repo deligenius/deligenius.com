@@ -65,7 +65,7 @@ const Header = prpos => {
 
         <div id="navbarBasic" className={`navbar-menu ${activateClass}`}>
           <div className="navbar-start">
-            <Link to="/docs" className="navbar-item active">
+            <Link to="/docs/installation" className="navbar-item active">
               <span role="img" aria-label="Page Facing Up">
                 📄
               </span>
