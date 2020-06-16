@@ -27,6 +27,10 @@ const Ol = props => {
   )
 }
 
+const Table = props => {
+  return <table className="table" {...props}></table>
+}
+
 export default {
   h1: props => <h1 className="is-size-1" {...props} />,
   h2: props => <h2 className="is-size-2" {...props} />,
@@ -40,4 +44,5 @@ export default {
   blockquote: BlockQuote,
   ul: Ul,
   ol: Ol,
+  table: Table
 }
