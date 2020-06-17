@@ -1,0 +1,48 @@
+---
+title: Query and Parameters
+route: /docs/query-parameters
+---
+
+### Query and Parameters
+> Deligenius has an official middleware module: `bodyParser`,
+> `mid` is a shortcut of [bodyParser](https://github.com/deligenius/bodyparser)
+> We use `mid` to extract `query` and `params` from url, please make sure you have `mid` import
+
+```ts
+import { mid } from "https://raw.githubusercontent.com/deligenius/bodyparser/master/mod.ts"
+```
+
+#### Get `query`
+
+> A `query` string is part of URL. 
+
+Suppose you have a request: `https://example.com/q?name=ferret&color=green`,
+query string is the part after `?` mark, which is `name=ferret&color=green`
+
+```ts
+app.use(mid.query(), ctx => {
+  let query = ctx.req.query
+  ctx.send(query)
+})
+```
+
+By using `mid.query()`, it parses the url then generate a `object` at `ctx.req.query`.
+
+For the example above, `ctx.req.query = {name: "ferret", color: "green"}`
+
+#### Get `params`
+
+> Route parameters is a custom utility to capture named segment from url.
+
+Suppose you have request: `https://example.com/john/29`, and you want to extract
+the part `name=john` and `age=29`. `mid.params("/:name/:age")` will help you to do the job
+
+```ts
+app.use(mid.params("/:name/:age"), ctx => {
+  let params = ctx.req.params
+  ctx.send(params)
+})
+```
+
+`mid.params()` handles parameters very well and populate a object at `ctx.req.params`.
+For the example above, `ctx.req.params = {name: "john", age: "29"}`

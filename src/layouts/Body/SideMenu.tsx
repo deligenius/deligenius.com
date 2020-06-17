@@ -29,8 +29,9 @@ const docsMenu: Menu = {
           label: "Benchmark",
           route: "/docs/benchmark",
         },
-        { label: "Hello world", route: "/docs/hello-world", },
+        { label: "Hello World", route: "/docs/hello-world", },
         { label: "Basic Routing", route: "/docs/basic-routing" },
+        { label: "Static Files", route: "/docs/static-files" },
       ],
     },
     {
@@ -38,8 +39,16 @@ const docsMenu: Menu = {
       toggle: false,
       items: [
         {
+          label: "Query & Params",
+          route: "/docs/query-parameters",
+        },
+        {
           label: "Parsing Body",
           route: "/docs/parsing-body",
+        },
+        {
+          label: "Form Data",
+          route: "/docs/form-data",
         },
         {
           label: "Error Handling",

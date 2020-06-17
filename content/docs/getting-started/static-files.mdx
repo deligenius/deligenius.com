@@ -1,0 +1,31 @@
+---
+title: Static Files
+route: /docs/static-files
+---
+
+### Static Files
+> Deligenius has an official middleware module: `bodyParser`,
+> `mid` is a shortcut of [bodyParser](https://github.com/deligenius/bodyparser)
+> Please make sure you have `mid` import
+
+```ts
+import { mid } from "https://raw.githubusercontent.com/deligenius/bodyparser/master/mod.ts"
+```
+
+#### Serve static files
+
+`mid.serveStatic(rootDir)` allows you to serve static files like images, css, html files.
+It accepts a root directory which to serve static assets.
+
+```ts
+app.use(mid.serveStatic("./public"))
+```
+
+Now you are able to read files from `./public` directory 
+```
+http://localhost:8000/img/logo.png
+http://localhost:8000/css/styels.css
+http://localhost:8000/js/myjs.js
+http://localhost:8000/index.html
+```
+
