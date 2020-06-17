@@ -21,6 +21,11 @@ It accepts a root directory which to serve static assets.
 app.use(mid.serveStatic("./public"))
 ```
 
+and you will need `--allow-read` permisson in you run command:
+```
+deno run --allow-net --allow-read ./app.ts
+```
+
 Now you are able to read files from `./public` directory 
 ```
 http://localhost:8000/img/logo.png
