@@ -31,7 +31,7 @@ it will be handled by the `app.handleError` or `router.handleError`
 and it won't crash the server.
 
 ```ts
-import {HttpError} from "https://raw.githubusercontent.com/deligenius/deligenius/master/mod.ts"
+import {HttpError} from "https://deno.land/x/deligenius/mod.ts"
 // you can throw HttpError in any middleware
 app.use(async (ctx, next) => {
   throw new HttpError("no user found", 404)

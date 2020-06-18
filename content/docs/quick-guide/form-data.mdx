@@ -19,7 +19,7 @@ but fortunately Deligenius has an official [Multiparser](https://github.com/deli
 to handle this kind of data.
 
 ```ts
-import { multiParser } from 'https://raw.githubusercontent.com/deligenius/multiparser/master/mod.ts'
+import { multiParser } from 'https://deno.land/x/multiparser/mod.ts'
 
 app.use(async(ctx) => {
   const form = await multiParser(ctx.request)
