@@ -4,6 +4,7 @@ route: /docs/form-data
 ---
 
 ### Form Data
+
 > Deligenius has an official middleware module: `bodyParser`,
 > `mid` is a shortcut of [bodyParser](https://github.com/deligenius/bodyparser)
 > Please make sure you have `mid` import
@@ -12,26 +13,75 @@ route: /docs/form-data
 import { mid } from "https://raw.githubusercontent.com/deligenius/bodyparser/master/mod.ts"
 ```
 
-#### Get `multipart/form-data`
-
-Dealing with ```multipart/form-data``` can be very complicated,
-but fortunately Deligenius has an official [Multiparser](https://github.com/deligenius/multiparser)
-to handle this kind of data.
-
-```ts
-import { multiParser } from 'https://deno.land/x/multiparser/mod.ts'
-
-app.use(async(ctx) => {
-  const form = await multiParser(ctx.request)
-  ctx.send(form)
-})
-```
-
 #### Get `urlencoded` form data
+
+> urlencoded form has a content-typef of `application/x-www-form-urlencoded`
 
 ```ts
 app.use(mid.urlencoded(), ctx => {
   let urlencoded = ctx.req.urlencoded
   ctx.send(urlencoded)
+})
+```
+
+#### Get `multipart/form-data`
+
+> multipart form has a content-typef of `multipart/form-data; boundary=...`
+
+Dealing with `multipart/form-data` can be very complicated,
+but fortunately Deligenius has an official [Multiparser](https://github.com/deligenius/multiparser)
+to handle this kind of data.
+
+In below code, `await multiParser(ctx.req)` return a data with type of `string | FormFile | FormFile[]`.
+
+Corresponding to upload file type of **string**, **single file** or **multiple files**.
+
+```ts
+interface FormFile {
+  /** filename  */
+  filename: string
+  /** content-type header value of file */
+  type: string
+  /** byte size of file */
+  size: number
+  /** in-memory content of file. Either content or tempfile is set  */
+  content?: Uint8Array
+}
+```
+
+Thus, in each `FormFile` we can use `Deno.writeFile(path:string, content: Uint8Array)` to write `FormFile.content` into local disk.
+
+```ts
+import { Application } from "https://deno.land/x/deligenius/mod.ts"
+import { multiParser } from "../mod.ts"
+
+let app = new Application({ port: 8000 }).listen()
+
+app.use(async ctx => {
+  if (ctx.req.url === "/upload") {
+    const form = await multiParser(ctx.req)
+
+    // form.multiple is array of FormFile
+    if (form.multiple instanceof Array) {
+      Deno.writeFile("myMultipleFile.txt", form.multiple[0].content)
+    }
+    // form.multiple is string
+    else if (typeof form.multiple === "string") {
+      console.log(form.multiple)
+    }
+    // form.multiple is FormFile object
+    else {
+      Deno.writeFile("myMultipleFile.txt", form.multiple.content!)
+    }
+  }
+
+  ctx.res.headers.set("content-type", "text/html")
+  ctx.send(`
+  <h3>multiparser form update</h3>
+  <form action="/upload" enctype="multipart/form-data" method="post">
+    <div>Text field title: <input type="text" name="title" /></div>
+    <div>File: <input type="file" name="multiple" multiple/></div>
+    <input type="submit" value="Upload" />
+  </form>`)
 })
 ```
