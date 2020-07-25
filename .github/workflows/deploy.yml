@@ -39,6 +39,7 @@ jobs:
           # make sure ./docs is empty
           rm -rd ./docs
           mkdir ./docs
+          echo removed ./docs folder
 
           # copy static files from ./public to ./docs
           cp -rf ./public/* ./docs
