@@ -34,10 +34,18 @@ jobs:
         with:
           cmd: build # install dependencies
 
-      - uses: borales/actions-yarn@v2.0.0
-        name: Deploy
-        with:
-          cmd: deploy # install dependencies
+      - name: Deploy
+        run: |
+          # make sure ./docs is empty
+          rm -rd ./docs
+          mkdir ./docs
+
+          # copy static files from ./public to ./docs
+          cp -r ./public/* ./docs
+          cp ./CNAME ./docs
+
+          # remove ./public folder
+          rm -rd ./public
 
       - name: Commit files
         run: |
