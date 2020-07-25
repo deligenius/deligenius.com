@@ -36,10 +36,13 @@ jobs:
 
       - name: Deploy
         run: |
+          # make sure ./docs is empty
+          rm -rd ./docs
+          mkdir ./docs
+
           # copy static files from ./public to ./docs
-          chmod +x ./public
-          mv public docs
-          echo rename public to docs
+          cp -rf ./public/* ./docs
+          echo Copy public to docs
           cp ./CNAME ./docs
           echo Copy CNAME to ./docs
 
