@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{baVu:function(n,t,e){"use strict";e.r(t);var a=e("q1tI"),u=e.n(a);t.default=function(){return u.a.createElement("div",null,"tutorial page")}}}]);
+//# sourceMappingURL=component---src-pages-tutorial-jsx-7454d0358a45e5031429.js.map
