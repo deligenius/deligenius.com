@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    # checkoput master branch
+    steps:
+    - uses: actions/checkout@v2
+      
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: install # install dependencies
+
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: clean # install dependencies
+      
+    - uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: deploy # install dependencies
+
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "action - workflows/deploy.yml" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.TOKEN }}
