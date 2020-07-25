@@ -40,9 +40,9 @@ jobs:
           rm -rd ./docs
           mkdir ./docs
 
-          # rename ./public to ./docs
-          mv public docs
-          echo Rename public to docs
+          # copy static files from ./public to ./docs
+          cp -r ./public/* ./docs
+          echo Copy public to docs
           cp ./CNAME ./docs
           echo Copy CNAME to ./docs
 
