@@ -51,6 +51,10 @@ const docsMenu: Menu = {
           route: "/docs/form-data",
         },
         {
+          label: "Use State",
+          route: "/docs/state",
+        },
+        {
           label: "Error Handling",
           route: "/docs/error-handling",
         },
