@@ -44,9 +44,6 @@ jobs:
           cp -r ./public/* ./docs
           cp ./CNAME ./docs
 
-          # remove ./public folder
-          rm -rd ./public
-
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
