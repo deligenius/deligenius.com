@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: npm run install
+      - run: npm install
       - run: npm run clean
       - run: npm run build
 
