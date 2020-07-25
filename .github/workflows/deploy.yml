@@ -6,9 +6,9 @@ name: Deploy
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,26 +17,35 @@ jobs:
     runs-on: ubuntu-latest
     # checkoput master branch
     steps:
-    - uses: actions/checkout@v2
-      
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install # install dependencies
+      - uses: actions/checkout@v2
 
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: clean # install dependencies
-      
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: deploy # install dependencies
+      - uses: borales/actions-yarn@v2.0.0
+        name: Install dependencies
+        with:
+          cmd: install # install dependencies
 
-    - name: Commit files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m "action - workflows/deploy.yml" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.TOKEN }}
+      - uses: borales/actions-yarn@v2.0.0
+        name: Clean build
+        with:
+          cmd: clean # install dependencies
+
+      - uses: borales/actions-yarn@v2.0.0
+        name: Build
+        with:
+          cmd: build # install dependencies
+
+      - uses: borales/actions-yarn@v2.0.0
+        name: Deploy
+        with:
+          cmd: deploy # install dependencies
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "action - workflows/deploy.yml" -a
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
