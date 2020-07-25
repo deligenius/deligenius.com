@@ -34,7 +34,7 @@ jobs:
           echo removed ./docs folder
 
           # copy static files from ./public to ./docs
-          cp -rf ./public/*.* ./docs
+          cp -r ./public/* ./docs
           echo Copy public to docs
           cp ./CNAME ./docs
           echo Copy CNAME to ./docs
@@ -49,5 +49,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TOKEN }}
+          branch: docs
 
       
