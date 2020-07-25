@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{Dtc0:function(t,e,n){"use strict";n.r(e);var a=n("q1tI"),c=n.n(a),o=n("YwZP"),u=n("Wbzz"),i=n("9xjJ");e.default=function(){return c.a.useEffect((function(){Object(u.navigate)("/docs/installation")})),c.a.createElement(o.Router,null,c.a.createElement(i.default,{path:"/docs"}))}}}]);
-//# sourceMappingURL=component---src-pages-index-jsx-8a282e6cef4e346dbdf2.js.map
